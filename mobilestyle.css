@@ -1,0 +1,243 @@
+
+/* CSS Document */
+
+* {
+	font-family: 'Montserrat', sans-serif;
+	
+}
+
+.ui-state-error {
+	border: 1px solid #ff6633;
+}
+
+html {
+	padding: 0px;
+	margin: 0px;
+	overflow: hidden;
+	height: 100%;
+	text-align: left;
+}
+
+body {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10pt;
+	padding: 0px;
+	margin: 0px;
+	background-color: #232323;
+	overflow: hidden;
+	height: 100%;
+	text-align: left;
+}
+
+a {
+	text-decoration: none;
+	color: #61b2e8;	
+}
+
+select {
+	width: 100%;
+	border: 1px solid #ccc;
+	background-color: #f1f1f1;	
+	border-radius: 4px;
+	padding: 10px;
+	font-size: 20px;
+	color: #666666;
+	line-height: 50px;
+}
+
+#wholepage {
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	vertical-align: center;
+}
+
+#header, #tradepageheader {
+	height: 33px;
+	background-color: #ffffff;	
+	overflow: hidden;
+	width: 100%;
+	z-index: 2000;
+}
+
+#header table, #tradepageheader table {
+	background-color: #ffffff;	
+	width: 100%;
+	height: 33px;	
+}
+
+#header .logo, #tradepageheader .logo {
+	padding: 5px;
+	padding-left: 20px;
+}
+#header .logo img, #tradepageheader .logo img {
+	height: 25px;
+}
+
+#header td, #tradepageheader td {
+	vertical-align: middle;
+	text-align: left;
+}
+
+#header #dealicons {
+	text-align: right;
+}
+
+#header #dealicons img{
+	margin-right: 15px;
+}
+
+#signon, #maincontent {
+	width: 100%;
+	background-color: #fff;
+	overflow: auto;
+}
+
+#signon th, #maincontent th {
+	font-family: 'Montserrat', sans-serif;
+	background-color: #b58543;
+	color: #fff;
+	text-align: center;
+	font-weight: bold;
+	font-size: 26px;
+	max-height: 40px;
+	padding: 5px;
+}
+
+#signon td, #maincontent td {
+	padding: 5px;
+	padding-left: 12px;
+	padding-right: 12px;
+	vertical-align: top;
+}
+
+#orderform {
+}
+
+#footer {
+	background-color: #fff;
+	vertical-align: middle;
+	padding: 4px;
+}
+
+#mysubs th, #customerlist th {
+	height: auto;
+	font-family: 'Montserrat', sans-serif;
+	background-color: #ffffff;
+	color: #000000;
+	text-align: left;
+	font-weight: bold;
+	font-size: 13px;
+	text-decoration: underline;
+	vertical-align: top;
+	padding: 5px;
+}
+
+.headerarea {
+	border-bottom: 4px solid #b58543;
+	font-weight: bold;
+	font-size: 16px;
+	
+}
+
+#menuitems {
+	background-color: #333;
+}
+
+#menuitems .ui-link-inherit {
+	padding-top: 5px !important;
+	padding-bottom: 5px !important;
+	background-color: #fff;	
+}
+
+.tradeouts {
+	display: none;	
+}
+
+#addrates td {
+	font-size: 18px;
+	line-height: 18px;
+	vertical-align: middle;	
+}
+
+.titlearea {
+	text-align: center;
+	border-bottom: 3px solid #b58543;
+	color: #666666;
+	font-size: 18px;
+	font-weight: bold;	
+}
+
+#customterm-popup {
+	min-width: 80%;	
+}
+
+.upperchars {
+	text-transform: uppercase;	
+}
+
+#programsradio img {
+	max-height: 22px;	
+}
+
+#orderbutton {
+	margin: 0px;
+	margin-top: 25px;
+	margin-left: -6px;
+	text-align: right;
+	padding: 8px;
+}
+
+#marketinginfo {
+	padding: 5px;	
+}
+
+#marketinginfo td {
+	text-align: left;	
+}
+
+
+#orderbutton button {
+	margin: 12px;	
+}
+
+#ordersummary {
+	padding: 10px;
+}
+
+.required {
+	color: #f33;	
+}
+
+.overlay { 
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0,0,0,0.7);
+	z-index: 2000;
+	display: none;
+}
+
+#customerlist {
+	overflow-y: auto;
+	max-heigt: 100%;
+}
+
+.smallprint {
+	font-size: 10px;	
+}
+
+#showdeals {
+	min-width: 100%;
+}
+
+.ui-content {
+	padding-left: 15px !important;	
+	padding-left: 15px !important;	
+	padding-top: 0px !important;	
+	padding-bottom: 0px !important;	
+}
+
+
+
+

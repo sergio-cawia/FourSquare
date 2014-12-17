@@ -1,0 +1,159 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="shortcut icon" href="favicon.ico">
+<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0" />
+<link rel="stylesheet" type="text/css" href="mobilestyle.css"/>
+<link rel="stylesheet" href="css/jquery.mobile.structure-1.3.2.min.css" />
+<link rel="stylesheet" href="css/myfsa.css" />
+<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+<script type="text/javascript" src="calcjs/jquery-1.9.1.js"></script>
+<script type="text/javascript" src="calcjs/jquery.mobile-1.3.2.min.js"></script>
+<script type="text/javascript" src="calcjs/jquery.maskedinput.js"></script>
+<script>
+var custcheck = "https://www.fsanywhere.com/myfsa/mycustomers.php";
+
+function startup()
+{
+	if ( !window.localStorage['myfsa'] )
+	{
+		signoff();
+	}
+	else
+	{
+		startupnext();	
+	}
+}
+
+function startupnext()
+{
+	$( window ).on( "swiperight", function( e ) { if ( !$(".ui-popup-screen" ).is( ":visible" ) ) { $( "#menuitems" ).panel( "open" ); } } );
+	$( window ).on( "swipeleft", function( e ) { $( "#menuitems" ).panel( "close" ); } );
+	showdeals();
+}
+
+function changeHeights() 
+{
+	var height = $( window ).height();
+	var width = $( window ).width();
+	var header = $( "#header" ).height();
+	var footer = $( "#footer" ).height();
+	$( "#maincontent" ).height( height - header - footer - 38 );
+	$( "#maincontent" ).parent().css( "max-height", height - header - footer - 38 );
+	$( "#maincontent" ).parent().css( "overflow", "visible" );
+	$( "#maincontent" ).width( width - 30 );
+	$( "#maincontent" ).css( "max-width", width - 30 );
+	$( "#maincontent" ).css( "margin-top", header + 15 );
+	$( "#menuitems" ).css( "margin-top", header );
+}
+
+function uds( rec, stat )
+{
+	$.post( custcheck, { job: "uds", app: 1, myfsa: window.localStorage['myfsa'], myfsaapp: window.localStorage['myfsaapp'], rec: rec, stat: stat }, function ( ) {  } );
+}
+
+function showdeals( stat )
+{
+	$.post( custcheck, { job: "showdeals", app: 1, myfsa: window.localStorage['myfsa'], myfsaapp: window.localStorage['myfsaapp'], stat: stat }, function ( data )
+	{
+		data = removescripting( data );
+		$( "#showdeals" ).html( data ).trigger( "create" );
+		$( "#showdeals" ).width( $( "#maincontent" ).width() -40 );
+		$( "#showdeals" ).height( "100%" );
+		$( "#showdeals" ).css( "max-height", "100%" );
+		$( "#showdeals" ).css( "overflow-y", "scroll" );
+	} );
+}
+
+function removescripting( data )
+{
+	var pieces = Array();
+	var returndata = "";
+	data = data.replace( /<script>/g, '|||||<scr' + 'ipt>' );
+	pieces = data.split( "|||||" );
+	$.each( pieces, function( key, value )
+	{
+		if ( value.search( "</scr" + "ipt>" ) > -1 ) 
+		{
+			 eval( value.substr( 0, value.search( "</scr" + "ipt>" ) + 9 ).replace( "<scr" + "ipt>", "" ).replace( "</scr" + "ipt>", "" ) );
+			 returndata += value.substr( value.search( "</scr" + "ipt>" ) + 9 );
+		}
+		else
+		{
+			returndata += value;;
+		}
+	} );
+	return returndata;
+}
+
+function signoff()
+{
+	localStorage.removeItem('myfsa');
+	localStorage.removeItem('myfsaapp');
+	location = "signon.html";
+}
+
+</script>
+<title>Vision Selling System</title>
+</head>
+<body onLoad="changeHeights(); startup();" onResize="changeHeights();">
+	<div id="diag"></div>
+	<div id="wholepage" data-role="page" data-ajax="false">
+		<div id="menuitems" data-role="panel" data-display="overlay" data-position="left">
+			<br />
+			<ul data-role="listview" data-ajax="false" data-inset="true" data-theme="b">
+				<li data-role="list-divider">MENU</li>
+				<li><a href="javascript://" onClick="location.href='mobilecalc.html';">Calculator</a></li>
+				<li><a href="javascript://" onClick="signoff();">Sign Off</a></li>
+			</ul>
+		</div>
+		<div id="header" data-role="header" data-position="fixed" data-fullscreen="true" data-tap-toggle="false" data-hide-during-focus="false">
+			<table cellspacing="0" cellpadding="0" border="0">
+				<tr>
+					<td class="logo">
+						<img src="calcimages/vision_logo_mobile.png" border="0" height="25"/>
+					</td>
+					<td>
+						<table cellpadding='0' cellspacing='0' border='0'><tr><td id='top' valign='bottom' style='text-align: right; font-family: Arial, Helvetica, sans-serif;font-size: 14px;color: #555;'><i>F</i>OUR SQUARE&nbsp;</td><td id='bottom' valign='top' style='text-align: left; font-family: Arial, Helvetica, sans-serif;font-size: 14px;'><strong>ANYWHERE</strong></td></tr></table>
+					</td>
+				</tr>
+			</table>
+		</div>
+		<div data-role="content">
+			<table border="0" id="maincontent" cellpadding="0" cellspacing="0">
+				<tr>
+					<th id="mycustomertitle">
+						MY CUSTOMERS
+					</th>
+				</tr>
+				<tr>
+					<td align="center" id="choosecustomers">
+						<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+							<input type="radio" data-theme="a" name="radio-choice" id="radio-choice" checked="checked" onClick="showdeals( 'all' );">
+							<label for="radio-choice">ALL</label>
+							<input type="radio" data-theme="a" name="radio-choice" id="radio-choice-a" onClick="showdeals( 0 );">
+							<label for="radio-choice-a">UNSOLD</label>
+							<input type="radio" data-theme="a" name="radio-choice" id="radio-choice-b" onClick="showdeals( 1 );">
+							<label for="radio-choice-b">SOLD</label>
+							<input type="radio" data-theme="a" name="radio-choice" id="radio-choice-c" onClick="showdeals( 2 );">
+							<label for="radio-choice-c">LOST</label>
+						</fieldset>
+						<div class="smallprint">( previous 30 days available on mobile )</div>
+					</td>
+				</tr>
+				<tr>
+					<td height="90%">
+						<div id="showdeals" valign="top"></div>
+					</td>
+				</tr>
+			</table>
+		</div>
+		<div data-role="footer" align="center" id="footer" data-position="fixed" data-fullscreen="true" data-tap-toggle="false" data-hide-during-focus="false">
+			<button type="button" onClick="$( '#menuitems' ).panel( 'open' );" data-theme="a">MENU</button>
+			<button type="button" onClick="location.href='mobilecalc.html';" data-theme="a">CALCULATOR</button>
+		</div>
+	</div>
+	<div id="comms" data-role="page" data-ajax="false"><div id="commsstatement"></div></div>
+</body>
+</html>

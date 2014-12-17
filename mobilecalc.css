@@ -1,0 +1,873 @@
+
+/* CSS Document */
+
+
+.ui-state-error {
+	border: 1px solid #ff6633;
+}
+
+html {
+	padding: 0px;
+	margin: 0px;
+	overflow: hidden;
+	height: 100%;
+	text-align: left;
+}
+
+body {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10pt;
+	padding: 0px;
+	margin: 0px;
+	background-color: #232323;
+	overflow: hidden;
+	height: 100%;
+	text-align: left;
+}
+
+a {
+	text-decoration: none;
+	color: #61b2e8;	
+}
+
+select {
+	width: 100%;
+	border: 1px solid #ccc;
+	background-color: #f1f1f1;	
+	border-radius: 4px;
+	padding: 10px;
+	font-size: 20px;
+	color: #666666;
+	line-height: 50px;
+}
+
+h5 {
+	padding: 10px;
+	margin: 0px;
+	border-bottom: 1px solid #cccccc;	
+	text-align: center;
+}
+
+#wholepage {
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	vertical-align: center;
+}
+
+#container {
+	padding: 15px;
+}
+
+
+#header, #tradepageheader {
+	height: 33px;
+	background-color: #ffffff;	
+	overflow: hidden;
+	width: 100%;
+	z-index: 2000;
+}
+
+#header table, #tradepageheader table {
+	background-color: #ffffff;	
+	width: 100%;
+	height: 33px;	
+}
+
+#header .logo, #tradepageheader .logo {
+	padding: 5px;
+	padding-left: 20px;
+}
+#header .logo img, #tradepageheader .logo img {
+	height: 25px;
+}
+
+#header td, #tradepageheader td {
+	vertical-align: middle;
+	text-align: left;
+}
+
+#header #dealicons {
+	text-align: right;
+}
+
+#header #dealicons img{
+	margin-right: 15px;
+}
+
+#dealinfo {
+	display: none;
+	width: 100%;
+	overflow: hidden;
+}
+
+#offeraccepted {
+	padding: 10px;	
+}
+
+#dealsummary {
+	overflow-y: auto;
+	overflow-x: hidden;	
+}
+
+#dealsummary table {
+	width: 100%;
+}
+
+#dealsummary td {
+	vertical-align: top;
+	padding: 3px;
+}
+
+#dealsummary th {
+	vertical-align: top;
+	padding: 3px;
+}
+
+#mini4sq {
+	height: 100%;
+	width: 100%;
+}
+
+#mini4sq table {
+	height: 100%;
+	width: 100%;
+	border-collapse: collapse;
+}
+
+#mini4sq td {
+	width: 50%;
+	text-align: center;
+	margin: 0px;
+	vertical-align: top;
+	cursor: pointer;
+}
+
+#mini4sq td .title {
+	text-align: center;
+}
+
+#mini4sql td .minivalue {
+}
+
+#dealinfotable {
+	width: 100%;
+	background-color: #464646;	
+}
+
+#tradebox {
+	background-color: #ffffff;	
+	
+}
+
+#pricebox {
+	background-color: #ffffff;	
+	
+}
+
+#downbox {
+	background-color: #ffffff;	
+	
+}
+
+#paymentbox {
+	background-color: #ffffff;	
+	
+}
+
+#dealinfocontent {
+	background-color: #343434;
+}
+
+#dealinfocontent th {
+	color: #999999;
+	width: 8%;
+	white-space: nowrap;
+	text-align: left;
+	padding: 5px;
+	padding-left: 10px;
+}
+
+#dealinfocontent .ui-input-text {
+	background-color: #fff;	
+	width: 90%;
+}
+
+#ymmvunder {
+	border-top-width: 1px;
+	border-right-width: 20px;
+	border-left-width: 20px;
+	border-top-style: solid;
+	border-right-style: solid;
+	border-bottom-style: none;
+	border-left-style: solid;
+	border-top-color: #999999;
+	border-right-color: #232323;
+	border-left-color: #232323;
+}
+
+#sobutton {
+	background-color: #ff6633;
+	margin: 0px;
+	text-align: center;
+	text-align: center;
+	width: 100%;
+	min-height: 50px;
+	max-height: 50px;
+	height: 50px;
+}
+
+#sobutton a {
+	font-family: 'Montserrat', sans-serif;
+	font-size: 10pt;
+	background-color: #ff6633;
+	color: #fff;
+	border: 0px;
+	text-align: center;
+	line-height: 100%;
+	width: 100%;
+	height: 100%;
+	padding: 12px;
+	white-space: nowrap;
+}
+
+
+
+.sqbox {
+	background-color: #ffffff;	
+	vertical-align: top;
+	xfloat: left;
+	xmargin: 5px;
+	display: none;
+	overflow-y: auto;
+	overflow-x: hidden;
+	
+	
+	
+	width: 100%;
+}
+
+#paymentincludes {
+	position: absolute;
+	font-size: 10px;
+	padding: 10px;
+}
+
+.sqtitle {
+	text-align: center;
+	height: 50px;
+	min-height: 50px;
+	max-height: 50px;
+}
+
+.sqtitle div {
+	padding-top: 5%;
+	color: #666666;
+	font-weight: 900;
+	font-size: 12pt;
+}
+
+.sqdollars {
+	text-align: center;
+	font-size: 55px;
+	font-weight: bold;
+	width: 99%;
+	min-width: 95%;
+	height: 80px;
+	min-height: 80px;
+	max-height: 80px;
+}
+
+#customerinformation, .innertemptrade {
+	margin-bottom: 10px;
+	margin-right: 10px;
+	margin-left: 10px;
+	margin-top: 0px;
+}
+
+
+.sqdetails {
+	position: absolute;
+	background-color: #f0f0f0;
+	height: 60px;
+	min-height: 60px;
+	max-height: 60px;
+}
+
+.sqdetails table {
+	padding-left: 15px;
+	height: 60px;
+	min-height: 60px;
+	max-height: 60px;
+}
+
+.sqdetails th {
+	text-align: left;
+	font-size: 12pt;
+	padding: 0px;
+	padding-left: 10px;
+}
+
+.sqdetails td {
+	text-align: left;	
+	width: 10%;
+	padding: 0px;
+	white-space: nowrap;
+}
+
+.sqbox .scratched {
+	text-align: center;
+	color: #ff6633;
+	font-weight: bold;
+	font-size: 20pt;
+	text-decoration: line-through;
+	background-image: url(calcimages/greydot.png);
+	background-size: 100px 2px;
+	background-repeat: no-repeat;
+	background-position: center top;
+}
+
+.pencilicon {
+	width: 40px;
+	height: 40px;
+	min-height: 40px;
+	max-height: 40px;
+	background-color: #61b2e8;
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-image: url(calcimages/pencilicon.png);
+	margin-left: 10px;
+	margin-right: 10px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
+
+
+#tradedetails {
+	width: 80%;
+	margin-left: 20px;
+}
+
+#tradedetails th {
+	width: 10%;
+	text-align: left;
+	font-weight: 100;
+	font-size: 9pt;
+	padding: 1px;
+}
+
+#tradedetails td {
+	text-align: left;
+	font-weight: bold;
+	width: 30%;
+	font-size: 10pt;
+	padding: 1px;
+}
+
+
+.required {
+	font-style: italic;
+	font-size: 9pt;
+	padding-left: 10px;
+	
+}
+
+.buttons {
+	padding-top: 25px;
+	width: 100%;
+	text-align: right;
+}
+
+.modal a { 
+	border: 1px solid #ff6633;
+	background-color: #f0f0f0;
+	padding: 6px;
+	margin: 3px;
+	margin-top: 13px;
+	color: #000 !important;
+	text-decoration: none;
+	line-height: 25px;
+}
+
+.fsamodalcontent input[type=text] {
+	font-size: 24px;
+}
+
+.fsamodalcontent {
+	background-color: #fff;
+	border: 1px solid #ff6633;
+	padding: 10px;
+}
+
+.ui-focus {
+	background-color: #eee !important;
+}
+
+/*
+.modal {
+	background-color: #fff;
+	display: none;
+	z-index: 25;
+	min-height: 400px;	
+}
+
+.modal table {
+	border: 1px solid #ff6633;
+	padding: 10px;
+	margin: 0px;
+	height: 100%;	
+	width: 100%;	
+}
+
+.modal td {
+	padding: 5px;
+	margin: 5px;	
+	text-align: left;
+}
+
+.modal td input {
+	border: 0px;
+	background-color: #f0f0f0;
+	padding: 5px;
+}
+
+.modal th {
+	font-size: 9pt;
+	color: #333333;
+	padding: 2px;
+	padding-left: 15px;
+	margin: 5px;	
+	text-align: left;
+}
+
+.modal select {
+	width: 100%;
+	border: 0px;
+	background-color: #f1f1f1;	
+	border-radius: 4px;
+	padding: 1px;
+	font-size: 20px;
+	color: #666666;
+	line-height: 30px;
+}
+
+*/
+/* Start KBB
+
+.modalkbb {
+	background-color: #fff;
+	display: none;
+	z-index: 25;
+	min-height: 400px;	
+}
+
+.modalkbb table {
+	border: 1px solid #ff6633;
+	padding: 10px;
+	margin: 0px;
+	height: 100%;	
+	width: 100%;	
+}
+
+.modalkbb td {
+	padding: 5px;
+	margin: 5px;	
+	text-align: left;
+}
+
+.modalkbb td input {
+	border: 0px;
+	background-color: #f0f0f0;
+	padding: 5px;
+}
+
+.modalkbb th {
+	font-size: 9pt;
+	color: #333333;
+	padding: 2px;
+	padding-left: 15px;
+	margin: 5px;	
+	text-align: left;
+}
+
+.modalkbb select {
+	width: 100%;
+	border: 0px;
+	background-color: #f1f1f1;	
+	border-radius: 4px;
+	padding: 1px;
+	font-size: 20px;
+	color: #666666;
+	line-height: 30px;
+}
+
+
+.kbboptiongroup {
+	padding: 10px;
+}
+
+.kbboptions {
+	border-bottom: 1px solid #ccc;
+	width: 100%;
+	float: left;
+	position: relative;	
+	text-align: left;
+	padding-top: 1px;
+	padding-bottom: 3px;
+}
+
+.kbboptions input[type=checkbox] {
+	width: 100%;	
+}
+ */
+
+#kbblogo {
+	height: 73px;
+}
+
+.vehiclelookupheader {
+	position: absolute;
+	background-color: #fff;
+	z-index: 100;
+	border-bottom: 1px solid #ccc;
+	padding-bottom: 2px;
+}
+
+#kbblower {
+	width: 100%;
+}
+
+#kbboptions {
+	text-align: center;	
+}
+
+#kbboptions table {
+	width: 100%;
+}
+
+.kbbrequired {
+	border: 1px solid #ff6633;
+}
+/* End KBB */
+
+
+/* Start NADA
+
+.modalnada {
+	background-color: #fff;
+	display: none;
+	z-index: 25;
+	min-height: 400px;	
+}
+
+.modalnada h3 {
+	border-bottom: 2px solid #444;
+	padding-top: 12px;
+	padding-bottom: 3px;
+	margin: 0px;
+	margin-top: 12px;	
+}
+
+.modalnada table {
+	border: 1px solid #ff6633;
+	padding: 10px;
+	margin: 0px;
+	height: 100%;	
+	width: 100%;	
+}
+
+.modalnada td {
+	padding: 5px;
+	margin: 5px;	
+	text-align: left;
+}
+
+.modalnada td input {
+	border: 0px;
+	background-color: #f0f0f0;
+	padding: 5px;
+}
+
+.modalnada th {
+	font-size: 9pt;
+	color: #333333;
+	padding: 2px;
+	padding-left: 15px;
+	margin: 5px;	
+	text-align: left;
+}
+
+.modalnada select {
+	width: 100%;
+	border: 0px;
+	background-color: #f1f1f1;	
+	border-radius: 4px;
+	padding: 1px;
+	font-size: 20px;
+	color: #666666;
+	line-height: 30px;
+}
+
+ */
+.nadaoptiongroup {
+	padding: 10px;
+}
+
+.nadaoptions {
+	border-bottom: 1px solid #ccc;
+	width: 100%;
+	float: left;
+	position: relative;	
+	padding-top: 1px;
+	padding-bottom: 3px;
+}
+
+.nadaoptions input[type=checkbox] {
+	width: 100%;	
+}
+
+#nadaoptions {
+	text-align: center;	
+	width: 100%;	
+}
+
+#nadaoptions table {
+	width: 100%;
+}
+
+.modalnada .nadarequired {
+	background-color: #FDD;
+}
+/* End NADA */
+
+
+/* Start History Modal */
+
+#history td {
+	padding: 10px;
+}
+
+#history th {
+	background-color: #666666;
+	color: #fff;
+	padding: 10px;
+	margin: 0px;
+	text-align: left;
+}
+
+.altrow1 {
+	background-color: #f0f0f0;
+}
+
+.altrow2 {
+	background-color: #ffffff;
+}
+
+#history a {
+	text-decoration: none;
+	color: #61b2e8;	
+}
+
+#history .scratched {
+	color: #ff6633;
+	font-weight: bold;
+	text-decoration: line-through;
+}
+
+#waiting {
+	width: 100%;
+	text-align: center;
+	margin-top: 25%;
+}
+
+#modalamos td {
+	padding: 3px;	
+}
+
+#historycontent  {
+	overflow: auto;
+}
+
+#historycontent table {
+	width: 100%;
+}
+
+#historycontent th {
+	white-space: nowrap;	
+}
+
+/* START CHAT 
+
+#chat {
+	overflow: hidden;	
+}
+*/
+
+#chat table {
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+#chatdesk, #chatcustomer {
+	width: 99%;
+	overflow-y: auto;
+	overflow-x: hidden;
+	border: 1px solid #ddd;
+}
+/*
+#chat input[type=text] {
+	width: 520px;
+	height: 30px;	
+	border: 1px solid #ddd;
+	padding: 3px;
+}
+
+
+ END CHAT */
+
+.altrow1:hover, .altrow2:hover {
+	background-color: #ff6633;
+	color: #fff;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.ui-progressbar {
+    position: relative;
+  }
+  .progress-label {
+    position: absolute;
+    width: 100%;
+	text-align: center;
+	margin-top: 5px;
+    font-weight: bold;
+    text-shadow: 1px 1px 0 #fff;
+  }
+  
+.ui-button-text-only .ui-button-text {
+	font-family: 'Montserrat', sans-serif;
+	font-size: 10pt;
+}
+
+#logon {
+	cursor: pointer;
+	margin-top: 100px;
+	width: 400px;
+	height: 250px;
+	background-color: #ffffff;
+	padding: 10px;
+	padding-top: 40px;
+}
+
+#logon #sabutton {
+	margin: 0px;
+	text-align: center;
+}
+
+#logon #sabutton a {
+	font-family: 'Montserrat', sans-serif;
+	font-size: 10pt;
+	background-color: #ff6633;
+	color: #fff;
+	border: 0px;
+	text-align: center;
+	line-height: 100%;
+	padding: 12px;
+	white-space: nowrap;
+	
+}
+
+.copyright {
+	color: #888888;
+	margin-top: 40px;
+}
+
+#personalmessage {
+	display: none;
+}
+
+#customername, #stocknumber {
+	font-size: 15pt;
+	font-family: 'Montserrat', sans-serif;
+	border: 0px;
+	background-color: #f0f0f0;
+	padding: 12px;
+	width: 65%;
+	height: 29px;
+	vertical-align: middle;
+	margin-left: 10px;
+}
+
+#tempterm {
+	padding: 5px;	
+}
+
+
+.dealssummaryamo {
+	display: none;	
+}
+
+#diag {
+	position: absolute;
+	z-index: 2000;
+	left: 0;
+	bottom: 0;
+	margin-top: 100px;
+	width: 100%;
+	height: 150px;
+	background-color: #fff;
+	border: 2px solid #fc0;
+	overflow: auto;
+	display: none;
+}
+
+#kbbconditiondiv {
+	padding-left: 6px;	
+}
+
+#kbbconditiondiv .ui-button-text {
+	font-size: 13px;
+}
+
+#bookit {
+	display: none;	
+}
+
+#commsstatement {
+	margin-top: 10%;
+	background-color: #ff6633;
+	text-align: center;
+	font-size: 45px;
+	padding: 20px;
+	color: #fff;
+}
+
+.nadamileagetr {
+	display: none;	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

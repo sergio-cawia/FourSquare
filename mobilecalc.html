@@ -1,0 +1,616 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="shortcut icon" href="favicon.ico">
+<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0" />
+
+<link rel="stylesheet" type="text/css" href="mobilecalc.css"/>
+<link rel="stylesheet" href="css/jquery.mobile.structure-1.3.2.min.css" />
+<link rel="stylesheet" href="css/fsa.min.css" />
+<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+<script type="text/javascript" src="calcjs/jquery-1.9.1.js"></script>
+<script type="text/javascript" src="calcjs/jquery.mobile-1.3.2.min.js"></script>
+<script type="text/javascript" src="calcjs/jquery.maskedinput.js"></script>
+<script type="text/javascript" src="mobilecalc.js"></script>
+<title>Vision Selling System</title>
+</head>
+<body onLoad="changeHeights(); getDefaults();">
+	<div id="diag"></div>
+	<div id="wholepage" data-role="page">
+		<div id="header" data-role="header">
+			<table cellspacing="0" cellpadding="0" border="0">
+				<tr>
+					<td class="logo">
+						<img src="calcimages/vision_logo_mobile.png" border="0" height="25" onClick="tradeouts( 'dealinfo' );"/>
+					</td>
+					<td id="custinfo">
+					</td>
+					<td id="dealicons">
+						<a href="javascript://" onClick="putPencil();">
+							<img src="calcimages/icon-save.png" border="0" />
+						</a>
+						<a href="javascript://" onClick="getcustomer();">
+							<img src="calcimages/icon-custinfo.png" border="0" />
+						</a>
+						<a href="javascript://" onClick="putPencil( 'quicksend' );" id="quicksend">
+							<img src="calcimages/icon-quicksend.png" border="0" />
+						</a>
+						<a href="javascript://" onClick="exit();">
+							<img src="calcimages/icon-exit.png" border="0" />
+						</a>
+					</td>
+				</tr>
+			</table>
+		</div>
+		<div id="container" data-role="main" class="ui-content">
+			<div id="modalprice" class="sqbox tradeouts">
+				<div data-role="header">
+					<h1>VEHICLE PRICE</h1>
+				</div>
+				<div data-role="main" class="ui-content">
+					<div class="fsamodalcontent">
+						<h3 class="ui-title">I will offer</h3>
+						<input type="number" id="proposedprice" name="proposedprice" class="numbersonly" value=""/>
+					</div>
+					<button onClick="changePricebox();" data-theme="a">SUBMIT</button>
+				</div>
+			</div>
+			<div id="modaldown" class="sqbox tradeouts">
+				<div data-role="header">
+					<h1>DOWN PAYMENT</h1>
+				</div>
+				<div data-role="main" class="ui-content">
+					<div class="fsamodalcontent">
+						<h3 class="ui-title">Change my down payment to</h3>
+						<input type="number" id="proposeddown" name="proposeddown" class="numbersonly"/>
+					</div>
+					<button onClick="changeDownbox();" data-theme="a">SUBMIT</button>
+				</div>
+			</div>
+			<div id="modalpayment" class="sqbox tradeouts">
+				<div data-role="header">
+					<h1>MONTHLY PAYMENT</h1>
+				</div>
+				<div data-role="main" class="ui-content">
+					<div class="fsamodalcontent">
+						<h3 class="ui-title">Change my monthly payment to</h3>
+						<input type="number" id="temppayment" name="temppayment" class="numbersonly"/>
+					</div>
+					<button onClick="changePayment( 'paycash' );" data-theme="a">PAY CASH</button>
+					<button onClick="changePayment( 'trade' );" data-theme="a">ROLL TO TRADE</button>
+					<button onClick="changePayment( 'down' );" data-theme="a">ROLL TO DOWN</button>
+					<button onClick="changePayment( 'price' );" data-theme="a">ROLL TO PRICE</button>
+				</div>
+			</div>
+			<div id="modalterm" class="sqbox tradeouts">
+				<div data-role="header">
+					<h1>LOAN PERIOD</h1>
+				</div>
+				<div data-role="main" class="ui-content">
+					<div class="fsamodalcontent">
+						<h3 class="ui-title">Change my loan term to</h3>
+						<div id="temptermtd">
+							<select id="tempterm" onchange="$('#term').html( $('#tempterm' ).val(  ) + ' months' );	balancedeal( 'payment' );"></select>
+						</div>
+					</div>
+					<button onClick="changeTerm();" data-theme="a">SUBMIT</button>
+				</div>
+			</div>
+			<div id="modalrate" class="sqbox tradeouts">
+				<div data-role="header">
+					<h1>A.P.R.</h1>
+				</div>
+				<div data-role="main" class="ui-content">
+					<div class="fsamodalcontent">
+						<h3 class="ui-title">Change my A.P.R. to</h3>
+						<select id="temprate" ></select>
+					</div>
+					<button onClick="changeRate();" data-theme="a">SUBMIT</button>
+				</div>
+			</div>
+			<div id="dealinfo" class="tradeouts">
+				<table id="dealinfocontent" cellspacing="0" cellpadding="0" border="0">
+					<tr>
+						<th>
+							Stock #:
+						</th>
+						<td>
+							<input type="text" name="dealstock" id="dealstock" class="pencil-field" placeholder="Stock #">
+						</td>
+					</tr>
+					<tr>
+						<th >
+							Year:
+						</th>
+						<td>
+							<input type="text" id="dealyear" class="numbersonly pencil-field" maxlength="4" placeholder="Year">
+						</td>
+					</tr>
+					<tr>
+						<th>
+							Make:
+						</th>
+						<td>
+							<input type="text" id="dealmake" class="pencil-field" placeholder="Make">
+						</td>
+					</tr>
+					<tr>
+						<th>
+							Model:
+						</th>
+						<td>
+							<input type="text" id="dealmodel" class="pencil-field" placeholder="Model">
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2" id="sobutton"><a href="javascript://" onClick="putPencil( '' );">SAVE</a></td>
+					</tr>
+				</table>
+			</div>
+			<div id="tradebox" class="sqbox tradeouts" onClick="gettrade();">
+				<div class="sqdetails">
+					<table cellspacing="0" cellpadding="0" border="0" width="100%">
+						<tr>
+							<td>
+								Payoff:
+							</td>
+							<th class="pencil-field currency balance-field" id="tradepayoff">
+								
+							</th>
+							<td>
+								<a href="javascript://" onClick="gettrade();">
+									<div class="pencilicon"></div>
+								</a>
+							</td>
+						</tr>
+					</table>
+				</div>
+				<div class="sqtitle"><div>VEHICLE TRADE-IN</div></div>
+				<div class="sqdollars pencil-field currency balance-field" id="tradeasking"></div>
+				<div class="sqcontent">
+					<table id="tradedetails" cellspacing="0">
+						<tr>
+							<th>
+								Type:
+							</th>
+							<td class=" pencil-field" id="tradetype"></td>
+							<th>
+								Mileage:
+							</th>
+							<td class=" pencil-field" id="trademileage"></td>
+						</tr>
+						<tr>
+							<th>
+								Year:
+							</th>
+							<td class=" pencil-field" id="tradeyear"></td>
+							<th>
+								Condition:
+							</th>
+							<td class=" pencil-field" id="tradecondition"></td>
+						</tr>
+						<tr>
+							<th>
+								Make:
+							</th>
+							<td class=" pencil-field" id="trademake"></td>
+							<th>
+								Payment:
+							</th>
+							<td class=" pencil-field currency" id="tradepayment"></td>
+						</tr>
+						<tr>
+							<th>
+								Model:
+							</th>
+							<td class=" pencil-field" id="trademodel"></td>
+							<th>
+								Bank:
+							</th>
+							<td class=" pencil-field" id="tradebank"></td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			<div id="pricebox" class="sqbox tradeouts" onClick="getprice();">
+				<div class="sqdetails">
+							<table cellspacing="0" cellpadding="0" border="0" width="100%">
+								<tr>
+									<td>
+										Total Sale: *
+									</td>
+									<th id="totalsale" class="currency" width="80%">
+										0
+									</th>
+									<td rowspan="2" style="vertical-align: middle;">
+										<a href="javascript://" onClick="getprice();">
+											<div class="pencilicon"></div>
+										</a>
+									</td>
+								</tr>
+								<tr>
+									<td colspan="2">
+										<span style="font-size: 12px;">* Includes estimated fees.</span>
+									</td>
+								</tr>
+							</table>
+				</div>
+				<div class="sqtitle"><div>VEHICLE PRICE</div></div>
+				<div class="sqdollars pencil-field currency balance-field" id="price"></div>
+				<div class="scratched"></div>
+			</div>
+			<div id="downbox" class="sqbox tradeouts" onClick="getdown();">
+				<div class="sqdetails">
+					<table cellspacing="0" cellpadding="0" border="0" width="100%">
+						<tr>
+							<td style="white-space: normal; width: 100%">&nbsp;
+								
+							</td>
+							<th>&nbsp;
+																
+							</th>
+							<td>
+								<a href="javascript://" onClick="getdown();">
+									<div class="pencilicon"></div>
+								</a>
+							</td>
+						</tr>
+					</table>
+				</div>
+				<div class="sqtitle"><div>DOWN PAYMENT</div></div>
+				<div class="sqdollars pencil-field currency balance-field" id="down"></div>
+				<div class="scratched"></div>
+			</div>
+			<div id="paymentbox" class="sqbox tradeouts">
+				<div class="sqdetails">
+					<table cellspacing="0" cellpadding="0" border="0" width="100%">
+						<tr>
+							<td>
+								<a href="javascript://" onClick="getrate();">A.P.R.:</a>
+							</td>
+							<th class="pencil-field" id="rate">
+								
+							</th>
+							<td rowspan="2" style="vertical-align: middle;">
+								<a href="javascript://" onClick="getpayment();">
+									<div class="pencilicon"></div>
+								</a>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<a href="javascript://" onClick="getterm();">Loan Period:</a>
+							</td>
+							<th class="pencil-field balance-field" id="term">
+								
+							</th>
+						</tr>
+					</table>
+				</div>
+				<div class="sqclickable" onClick="getpayment();">
+					<div class="sqtitle"><div>MONTHLY PAYMENT</div></div>
+					<div class="sqdollars pencil-field currency balance-field" id="payment"></div>
+					<div class="scratched"></div>
+					<div style="vertical-align: bottom; text-align: center">Payment includes estimated tax, title, license, and fees</div>
+				</div>
+			</div>
+			<div id="modalamos" class="sqbox tradeouts">
+				<div class="sqtitle"><div>VEHICLE ADD-ONS</div></div>
+				<div style="margin: 10px;">
+					<h5>Selected<span id="amosselected"></span></h5>
+					<div id="currentamos" class="fsamodalcontent">
+						<table cellspacing="0" cellpadding="0" border="0">
+						</table>
+					</div>
+					<h5>Available</h5>
+					<div id="chooseamos" class="fsamodalcontent">
+						<table cellspacing="0" cellpadding="0" border="0">
+						</table>
+					</div>
+				</div>
+			</div>
+			<div id="customer" class="sqbox tradeouts">
+				<div class="sqtitle"><div>CUSTOMER INFORMATION</div></div>
+				<div id="customerinformation">
+					<input type="text" name="primaryfirst" id="primaryfirst" class="pencil-field" placeholder="First Name"/>
+					<input type="text" name="primarylast" id="primarylast" class="pencil-field" placeholder="Last Name"/>
+					<input type="email" name="primaryemail" id="primaryemail" class="pencil-field" placeholder="E-mail Address" onKeyUp="if ( $( this ).val().length > 6 && $(this).val().search(/@/i) > -1 && $(this).val().search(/\./i) > -1 ) { $( '#sendtocust' ).button( 'enable' ); } else { $( '#sendtocust' ).button( 'disable' ); }"/>
+					<table cellspacing="0" cellpadding="0"><tr><td><input type="number" name="primarycellareacode" id="primarycellareacode" class="pencil-field numbersonly areacode" /></td><td>&nbsp;</td><td><input type="number" name="primarycellphone" id="primarycellphone" class="pencil-field numbersonly phonenumber" placeholder="Mobile Phone"/></td></tr></table>
+					<button type="button" id="sendtocust" data-theme="a" disabled="disabled" onClick="putPencil( 'sendtocust' );">SEND TO CUSTOMER</button>
+				</div>
+			</div>
+			<div id="modaltrade" class="sqbox tradeouts" >
+				<div style="position: absolute; z-index: 100; width: 90%; background-color: #fff; margin-left: 5px;">
+					<button onClick="changeTradebox();" data-theme="a">SUBMIT</button>
+				</div>
+				<br /><Br />
+				<div class="sqtitle"><div>VEHICLE TRADE-IN</div></div>
+				<div class="innertemptrade">
+					<table width="100%">
+						<tr>
+							<td id="bookboth">
+								<table width="100%" cellpadding="3" cellspacing="0" border="0">
+									<tr>
+										<td valign="middle" width="10%" align="center" onClick="bookit( 'AUTO' );">
+											<img src="images/kbblogo-small.png" height="30" />
+										</td>
+										<td valign="middle" width="30%" align="center" nowrap="nowrap" style="white-space: nowrap;">
+											<fieldset data-role="controlgroup" data-type="horizontal">
+												<input data-theme="a" type="radio" onClick="$( '#temptradetype' ).val( 'AUTO' ); bookit( 'AUTO' );" name="bookittype" id="bookittypeauto" />
+												<label for="bookittypeauto">AUTO</label>
+												<input data-theme="a" type="radio" onClick="$( '#temptradetype' ).val( 'RV' ); bookit( 'RV' );" name="bookittype" id="bookittyperv" />
+												<label for="bookittyperv">&nbsp;RV&nbsp;</label>
+												<input type="hidden" id="temptradetype">
+											</fieldset>
+										</td>
+										<td valign="middle" width="10%" align="center" onClick="bookit( 'RV' );">
+											<img src="images/nadalogo-small.png" height="30" />
+										</td>
+									</tr>
+								</table>
+							</td>
+							<td id="bookkbb">
+								<table width="100%" cellpadding="3" cellspacing="0" border="0" onClick="bookit( 'AUTO' );">
+									<tr>
+										<td valign="middle" width="10%" align="center">
+											<img src="images/kbblogo-small.png" />
+										</td>
+										<td valign="middle" width="90%">
+											<button type="button" data-theme="a" >Book it</button>
+										</td>
+									</tr>
+								</table>
+							</td>
+							<td id="booknada">
+								<table width="100%" cellpadding="3" cellspacing="0" border="0" onClick="bookit( 'RV' );">
+									<tr>
+										<td valign="middle" width="10%" align="center">
+											<img src="images/nadalogo-small.png" />
+										</td>
+										<td valign="middle" width="90%">
+											<button type="button" data-theme="a" >Book it</button>
+										</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<input type="number" id="temptradeasking" class="numbersonly" placeholder="Value" />
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<input type="number" id="temptradeyear" class="numbersonly" placeholder="Year" >
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<input type="text" id="temptrademake" placeholder="Make" />
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<input type="text" id="temptrademodel" placeholder="Model" />
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<input type="number" id="temptradepayoff" class="numbersonly" placeholder="Payoff" />
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<input type="number" id="temptradepayment" class="numbersonly" placeholder="Payment" />
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<input type="number" id="temptrademileage" class="numbersonly" placeholder="Mileage" />
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<input type="text" id="temptradecondition" placeholder="Condition" />
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<input type="text" id="temptradebank" placeholder="Bank" />
+							</td>
+						</tr>
+					</table>
+					<br />
+						<button onClick="changeTradebox();" data-theme="a">SUBMIT</button>
+					<br />
+				</div>
+			</div>
+			<div id="modalkbb" class="sqbox tradeouts">
+				<div class="innertemptrade">
+					<table width="100%" cellspacing="0" cellpadding="0" id="kbbheader" class="vehiclelookupheader">
+						<tr>
+							<td colspan="2">
+								<div class="sqtitle"><div>BOOK IT WITH KELLEY BLUE BOOK</div></div>
+							</td>
+						</tr>
+						<tr>
+							<th width="50%" align="center">
+								Value
+							</th>
+							<td width="50%" rowspan="2" align="center" style="text-align: center; vertical-align: middle;"><img id="kbblogo" src="calcimages/kbb.png" border="0" /></td>
+						</tr>
+						<tr>
+							<td style="text-align: center; font-size: 24px;" id="temptradeaskingkbb" class="currency" onClick="kbbgetvalue();">
+							</td>
+						</tr>
+					</table>
+					<div id="kbblookupspacer"></div>
+					<table border="0" style="width: 100%;" id="kbblower">
+						<tr>
+							<td>
+							</td>
+						</tr>
+						<tr>
+							<td align="center" style="text-align: center">
+								<div id="kbbconditiondiv">
+									<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+										<input onClick="kbbchoosevalue();" type="radio" name="kbbcondition" data-theme="a" id="kbbcondition-excellent" value="TradeInExcellent"/><label for="kbbcondition-excellent">Excellent</label>
+										<input onClick="kbbchoosevalue();" type="radio" name="kbbcondition" data-theme="a" id="kbbcondition-verygood" value="TradeInVeryGood" checked/><label for="kbbcondition-verygood">Very Good</label>
+										<input onClick="kbbchoosevalue();" type="radio" name="kbbcondition" data-theme="a" id="kbbcondition-good" value="TradeInGood" /><label for="kbbcondition-good">Good</label>
+										<input onClick="kbbchoosevalue();" type="radio" name="kbbcondition" data-theme="a" id="kbbcondition-fair" value="TradeInFair" /><label for="kbbcondition-fair">Fair</label>
+									</fieldset>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								Mileage
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<input type="number" id="temptrademileagekbb" class="numbersonly" onxBlur="if ( this.value < 10 ) { $( this ).focus(); $( this ).parent().addClass( 'kbbrequired' ); $('#temptradeyearkbb').prop( 'disabled', true ); } else { $('#temptradeyearkbb').prop( 'disabled', false ); }" onKeyUp="if ( $( this ).val() > 9 ) { $('#temptradeyearkbb').prop( 'disabled', false ); $( this ).parent().removeClass( 'kbbrequired' ); }"/>
+							</td>
+						</tr>
+						<tr>
+							<td id="temptradeyearkbbtd">
+								<select id="temptradeyearkbb" onChange="populatetemptrademakekbb( this.value );" disabled="disabled" data-theme="a"><option value=''>Loading...</option></select>
+							</td>
+						</tr>
+						<tr>
+							<td id="temptrademakekbbtd">
+							</td>
+						</tr>
+						<tr>
+							<td id="temptrademodelkbbtd">
+							</td>
+						</tr>
+						<tr>
+							<td id="temptradetrimkbbtd">
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2" id="kbboptions"></td>
+						</tr>
+						<tr>
+							<td id="kbbgetvaluebuttontd">
+							</td>
+						</tr>
+						<tr>
+							<td id="buttonkbbtd">
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			<div id="modalnada" class="sqbox tradeouts">
+				<div class="innertemptrade">
+					<table width="100%" cellspacing="0" cellpadding="0" id="nadaheader" class="vehiclelookupheader">
+						<tr>
+							<td colspan="2">
+								<div class="sqtitle"><div>BOOK IT WITH NADA GUIDE</div></div>
+							</td>
+						</tr>
+						<tr>
+							<th width="50%" align="center">
+								Value
+							</th>
+							<td width="50%" rowspan="2" align="center" style="text-align: center; vertical-align: middle;"><img src="calcimages/nada.png" border="0" /></td>
+						</tr>
+						<tr>
+							<td style="font-size: 24px;" align="center" id="temptradeaskingnada" class="currency" onClick="nadagetvalue();">
+							</td>
+						</tr>
+					</table>
+					<div id="nadalookupspacer"></div>
+					<table border="0" width="100%">
+						<tr>
+							<td>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<select id="temprvtypenada"  onchange="populatetemptrademakenada( this.value );" data-theme="a">
+									<option value="">Choose a Type</option>
+									<option value="2">Truck Campers</option>
+									<option value="3">Motor Homes</option>
+									<option value="4">Travel Trailers & 5th Wheel</option>
+									<option value="5">Park Models</option>
+									<option value="6">Camping Trailers</option>
+								</select>
+							</td>
+						</tr>
+						<tr class="nadamileagetr">
+							<td>
+								Mileage
+							</td>
+						</tr>
+						<tr class="nadamileagetr">
+							<td>
+								<input type="number" id="temptrademileagenada" class="numbersonly" onxBlur="if ( $( '#temprvtypenada' ).val() == 3 && $( this ).val().length == 0 ) { $( this ).focus(); $( this ).parent().addClass( 'kbbrequired' ); $('#temprvtypenada').prop( 'disabled', true ); return false; } else { $('#temprvtypenada').prop( 'disabled', false ); }" onKeyUp="if ( $( this ).val().length > 0 ) { $('#temprvtypenada').prop( 'disabled', false ); $( this ).parent().removeClass( 'kbbrequired' ); }"/>
+							</td>
+						</tr>
+						<tr>
+							<td id="temptrademakenadatd">
+								<select id="temptrademakenada" onChange="populatetempyearsnada();" disabled="disabled" data-theme="a"></select>
+							</td>
+						</tr>
+						<tr>
+							<td id="temptradeyearnadatd">
+								<select id="temptradeyearnada" onChange="populatetemptrademodelnada( this.value );" disabled="disabled" data-theme="a"></select>
+							</td>
+						</tr>
+						<tr>
+							<td id="temptrademodelnadatd">
+								<select id="temptrademodelnada" onChange="nadagetconfig();" disabled="disabled" data-theme="a"></select>
+							</td>
+						</tr>
+						<tr>
+							<td id="nadagetvaluebuttontd">
+							</td>
+						</tr>
+						<tr>
+							<td  id="nadaoptions"></td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+		<div id="footer" data-role="footer">
+			<table id="mini4sq" cellpadding="0" cellspacing="0" border="0">
+				<tr>
+					<td onClick="tradeouts( 'tradebox' );" style="border-bottom: 1px solid #232323; border-right: 1px solid #232323;">
+						<div class="title">
+							TRADE-IN
+						</div>
+						<div id="minitradeasking" class="minivalue"></div>
+					</td>
+					<td onClick="tradeouts( 'pricebox' );" style="border-bottom: 1px solid #232323;">
+						<div class="title">
+							VEHICLE PRICE
+						</div>
+						<div id="miniprice" class="minivalue"></div>
+					</td>
+				</tr>
+				<tr>
+					<td onClick="tradeouts( 'downbox' );" style="border-right: 1px solid #232323;">
+						<div class="title">
+							DOWN PAYMENT
+						</div>
+						<div id="minidown" class="minivalue"></div>
+					</td>
+					<td onClick="tradeouts( 'paymentbox' );">
+						<div class="title">
+							MONTHLY PAYMENT
+						</div>
+						<div id="minipayment" class="minivalue"></div>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<div id="comms" data-role="page"><div id="commsstatement"></div></div>
+	<div id="qscsfailed" data-role="page"><div id="qscsstatement"></div></div>
+</body>
+</html>

@@ -1,0 +1,187 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="shortcut icon" href="favicon.ico">
+<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0" />
+<link rel="stylesheet" type="text/css" href="mobilestyle.css"/>
+<link rel="stylesheet" href="css/jquery.mobile.structure-1.3.2.min.css" />
+<link rel="stylesheet" href="css/myfsa.css"  />
+<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+<script type="text/javascript" src="calcjs/jquery-1.9.1.js"></script>
+<script type="text/javascript" src="calcjs/jquery.mobile-1.3.2.min.js"></script>
+
+<script>
+
+function init() {
+        if(isAndroid()){
+            $.getScript( "js/cordova-android.js" );
+        }else if(isiOS()){
+            $.getScript( "js/cordova-ios.js" );
+        }
+
+         document.addEventListener("deviceready", onDeviceReady, false);
+    }
+
+    function isAndroid(){
+        return navigator.userAgent.indexOf("Android") > 0;
+    }
+
+    function isiOS(){
+        return ( navigator.userAgent.indexOf("iPhone") > 0 || navigator.userAgent.indexOf("iPad") > 0 || navigator.userAgent.indexOf("iPod") > 0); 
+    }
+
+    function onDeviceReady(){
+        console.log("device is ready");
+    }
+
+
+var signcheck = "https://www.fsanywhere.com/myfsa/signon.php";
+function changeHeights()
+{
+	var height = $( window ).height();
+	var width = $( window ).width();
+	var header = $( "#header" ).height();
+	var footer = $( "#footer" ).height();
+	$( "#signon" ).height( height - header - footer - 38 );
+	$( "#signon" ).parent().css( "max-height", height - header - footer - 38 );
+	$( "#signon" ).parent().css( "overflow", "visible" );
+	$( "#signon" ).width( width - 30 );
+	$( "#signon" ).css( "max-width", width - 30 );
+	$( "#signon" ).css( "margin-top", header + 15 );
+	$( "#menuitems" ).css( "margin-top", header );
+}
+
+function startup()
+{
+	$( "#gobutton" ).attr( "disabled", true );
+	$( "#gobutton" ).button();
+	$( "#email" ).select();
+	setTimeout( function () { if ( $( "#email" ).val().length > 5 ) { $( "#gobutton" ).attr( "disabled", false ); $( "#gobutton" ).button( "refresh" ); } }, 500 );
+}
+
+function passcheck()
+{
+	if ( $( "#password" ).val().length > 5 )
+	{
+		$( "#password" ).removeClass( "required" );
+		$( "#gobutton" ).attr( "disabled", false );
+		$( "#gobutton" ).button( "refresh" );
+	}
+	else
+	{
+		$( "#password" ).addClass( "required" );	
+		$( "#gobutton" ).attr( "disabled", true );
+		$( "#gobutton" ).button( "refresh" );
+	}
+}
+
+function removescripting( data )
+{
+	var pieces = Array();
+	var returndata = "";
+	data = data.replace( /<script>/g, '|||||<scr' + 'ipt>' );
+	pieces = data.split( "|||||" );
+	$.each( pieces, function( key, value )
+	{
+		if ( value.search( "</scr" + "ipt>" ) > -1 ) 
+		{
+			 eval( value.substr( 0, value.search( "</scr" + "ipt>" ) + 9 ).replace( "<scr" + "ipt>", "" ).replace( "</scr" + "ipt>", "" ) );
+			 returndata += value.substr( value.search( "</scr" + "ipt>" ) + 9 );
+		}
+		else
+		{
+			returndata += value;;
+		}
+	} );
+	return returndata;
+}
+
+function formcheck()
+{
+	$.post( signcheck, { app: 1, post: $( "form" ).serializeArray() }, function ( data ) { eval( removescripting( data ) ); } );	
+}
+
+function accountrecovery()
+{
+	$.post( signcheck, { job: "accountrecovery", email: $( "#email" ).val() }, function ( data )
+	{
+		$('#sentmessage').html( data );
+		$('#sentmessage').show();
+	} );
+}
+
+$(document).keypress(function(e) {
+  if(e.which == 13) {
+	if ( $( "#password" ).val().length > 5 )
+	{
+		$( "#password" ).removeClass( "required" );
+		$( "#gobutton" ).attr( "disabled", false );
+		$( "#gobutton" ).button( "refresh" );
+		$( "#gobutton" ).click();
+	}
+	else
+	{
+		$( "#password" ).addClass( "required" );	
+		$( "#gobutton" ).attr( "disabled", true );
+		$( "#gobutton" ).button( "refresh" );
+	}
+  }
+});
+
+</script>
+<title>Vision Selling System</title>
+</head>
+<body onLoad="changeHeights(); startup(); init();" onresize="changeHeights();">
+	<div id="diag"></div>
+	<div id="wholepage" data-role="page" data-ajax="false">
+		<div id="header" data-role="header" data-position="fixed" data-fullscreen="true" data-tap-toggle="false" data-hide-during-focus="false">
+			<table cellspacing="0" cellpadding="0" border="0">
+				<tr>
+					<td class="logo">
+						<img src="calcimages/vision_logo_mobile.png" border="0" height="25" onClick="tradeouts( 'dealinfo' );"/>
+					</td>
+					<td>
+					<table cellpadding='0' cellspacing='0' border='0'><tr><td id='top' valign='bottom' style='text-align: right; font-family: Arial, Helvetica, sans-serif;font-size: 14px;color: #555;'><i>F</i>OUR SQUARE&nbsp;</td><td id='bottom' valign='top' style='text-align: left; font-family: Arial, Helvetica, sans-serif;font-size: 14px;'><strong>ANYWHERE</strong></td></tr></table>
+					
+					</td>
+				</tr>
+			</table>
+		</div>
+		<div data-role="content">
+			<form>
+				<table border="0" id="signon">
+					<tr>
+						<th>
+							SIGN ON
+						</th>
+					</tr>
+					<tr>
+						<td>
+							<input placeholder="Email" type="email" name="email" id="email" value=""/>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<input placeholder="Password" type="password" name="password" id="password" onkeyup="passcheck();" value="" /> 
+						</td>
+					</tr>
+					<tr>
+						<td><div style="display: none; color: #f66; text-align: center;" id="sentmessage">A recovery email has been sent.</div></td>
+					</tr>
+					<tr>
+						<td>
+							<button id="gobutton" disabled="disabled" type="button" data-theme="a" onclick="formcheck();">GO></button>
+						</td>
+					</tr>
+				</table>
+			</form>`
+		<div data-role="footer" align="center" id="footer" data-position="fixed" data-fullscreen="true" data-tap-toggle="false" data-hide-during-focus="false" style="white-space: nowrap;">
+			<button type="button" onclick="accountrecovery();" data-theme="a">PASSWORD HELP?</button>
+            <a href="javascript://" data-role="button" onclick="window.open('https://www.fsanywhere.com/myfsa/signup.php', '_system', 'location=no')" target="_system">SIGN UP</a>
+		</div>
+	</div>
+	</div>
+	<div id="comms" data-role="page" data-ajax="false"><div id="commsstatement"></div></div>
+</body>
+</html>
